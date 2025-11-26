@@ -35,6 +35,15 @@ public class LibraryManager {
         return book.getId();
     }
 
+    public Book getBookById(long bookId) {
+        for (Book book : bookList) {
+            if (book.getId() == bookId) {
+                return book;
+            }
+        }
+        return null;
+    }
+
     /**
      * 박우현
      */
