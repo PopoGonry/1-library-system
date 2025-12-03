@@ -1,29 +1,21 @@
-### IntelliJ IDEA ###
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
+# IntelliJ IDEA에서 생성하는 파일 무시
+.idea/
+*.iml
+*.iws
+*.ipr
 
-### Eclipse ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
+# 컴파일된 클래스 및 빌드 아티팩트 무시
+/out/
+/target/
+/build/
+*.class
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
+# 로그 및 임시 파일 무시
+*.log
+*.swp
+*~
+/temp/
 
-### VS Code ###
-.vscode/
-
-### Mac OS ###
+# 시스템 파일 무시
 .DS_Store
+Thumbs.db
