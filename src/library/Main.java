@@ -40,42 +40,42 @@ public class Main {
 
             case 2:
 
-                System.out.println("1. 제목을 통해 검색");
-                System.out.println("2. 저자를 통해 검색");
-                System.out.println("3. 분류 코드를 통해 검색");
-                System.out.println("검색 방법을 선택하세요: ");
-                int searchSelect = sc.nextInt();
-                if (!(1 <= searchSelect && searchSelect <= 3)) {
-                    System.out.println("잘못된 입력.");
-                    return;
-                }
-
-                List<Book> result;
-                String keyword;
-                switch (searchSelect) {
-                    case 1:
-                        System.out.println("제목을 입력해주세요. :");
-                        keyword = sc.next();
-
-                       result = libraryManager.searchBookByName(keyword);
-
-                    case 2:
-                        System.out.println("저자를 입력해주세요. :");
-                        keyword = sc.next();
-                        result = libraryManager.searchBookByAuthor(keyword);
-
-                    case 3:
-                        System.out.println("분류 코드를 입력해주세요. :");
-                        keyword = sc.next();
-                        result = libraryManager.searchBookByClassificationCode(keyword);
-
-                    default:
-                        for (Book searchBook : result) {
-                            System.out.println(searchBook);
-                        }
-                        System.out.println("책 검색이 정상적으로 처리되었습니다.");
-                        break;
-                }
+//                System.out.println("1. 제목을 통해 검색");
+//                System.out.println("2. 저자를 통해 검색");
+//                System.out.println("3. 분류 코드를 통해 검색");
+//                System.out.println("검색 방법을 선택하세요: ");
+//                int searchSelect = sc.nextInt();
+//                if (!(1 <= searchSelect && searchSelect <= 3)) {
+//                    System.out.println("잘못된 입력.");
+//                    return;
+//                }
+//
+//                List<Book> result;
+//                String keyword;
+//                switch (searchSelect) {
+//                    case 1:
+//                        System.out.println("제목을 입력해주세요. :");
+//                        keyword = sc.next();
+//
+//                       result = libraryManager.searchBookByName(keyword);
+//
+//                    case 2:
+//                        System.out.println("저자를 입력해주세요. :");
+//                        keyword = sc.next();
+//                        result = libraryManager.searchBookByAuthor(keyword);
+//
+//                    case 3:
+//                        System.out.println("분류 코드를 입력해주세요. :");
+//                        keyword = sc.next();
+//                        result = libraryManager.searchBookByClassificationCode(keyword);
+//
+//                    default:
+//                        for (Book searchBook : result) {
+//                            System.out.println(searchBook);
+//                        }
+//                        System.out.println("책 검색이 정상적으로 처리되었습니다.");
+//                        break;
+//                }
 
             case 3:
                 System.out.println("책의 id를 입력해주세요. : ");
