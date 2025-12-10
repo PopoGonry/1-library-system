@@ -77,7 +77,7 @@ public class LibraryManagerV1_5 extends LibraryManager {
             return true;
 
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
