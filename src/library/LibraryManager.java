@@ -13,6 +13,7 @@ public class LibraryManager {
     public Long addBook(Book book) {
         long newId;
 
+
         if (bookList.isEmpty()) {
             newId = 1L;
         } else {
@@ -47,6 +48,50 @@ public class LibraryManager {
     /**
      * 박우현
      */
+    // 제목 검색
+    public List<Book> searchBookByName(String name) {
+        List<Book> result = new ArrayList<>();
+
+        for (Book book : bookList) {
+            String title = book.getTitle().toLowerCase();
+            String keyword = name.toLowerCase();
+
+            if (title.contains(keyword)) {
+                result.add(book);
+            }
+        }
+        return result;
+    }
+
+    // 저자 검색
+    public List<Book> searchBookByAuthor(String author) {
+        List<Book> result = new ArrayList<>();
+
+        for (Book book : bookList) {
+            String bookAuthor = book.getAuthor().toLowerCase();
+            String keyword = author.toLowerCase();
+
+            if (bookAuthor.contains(keyword)) {
+                result.add(book);
+            }
+        }
+        return result;
+    }
+
+    // 분류 코드 검색
+    public List<Book> searchBookByClassificationCode(String classificationCode) {
+        List<Book> result = new ArrayList<>();
+
+        for (Book book : bookList) {
+            String bookCode = book.getClassificationCode();
+
+            if (bookCode.startsWith(classificationCode)) {
+                result.add(book);
+            }
+        }
+        return result;
+    }
+
 //    public List<Book> searchBookByName(String name) {}
 //    public List<Book> searchBookByAuthor(String name) {}
 //    public List<Book> searchBookByClassificationCode(String name) {}
