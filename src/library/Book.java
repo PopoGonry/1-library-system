@@ -21,6 +21,20 @@ public class Book {
         this.isLoaned = false;
     }
 
+    public Book() {
+    }
+
+    public Book(Long id, String isbn, String title, String author, String publisher, int publicationYear, String classificationCode, boolean isLoaned) {
+        this.id = id;
+        this.isbn = isbn;
+        this.title = title;
+        this.author = author;
+        this.publisher = publisher;
+        this.publicationYear = publicationYear;
+        this.classificationCode = classificationCode;
+        this.isLoaned = isLoaned;
+    }
+
     // Getter 메서드
     public Long getId() {
         return id;
