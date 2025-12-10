@@ -7,7 +7,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        LibraryManager libraryManager = new LibraryManager();
+        LibraryManagerV1_5 libraryManager = new LibraryManagerV1_5();
+
+        libraryManager.loadData();
 
         System.out.println("1. 입력");
         System.out.println("2. 검색");
@@ -36,6 +38,8 @@ public class Main {
 
                 System.out.println(book);
                 System.out.println("\n책 등록이 정상적으로 처리되었습니다.");
+
+                libraryManager.saveDate();
 
                 break;
 
@@ -89,6 +93,7 @@ public class Main {
 
                 if(isSuccessLoan) {
                     System.out.println("책 대출이 정상적으로 처리되었습니다.");
+                    libraryManager.saveDate();
                 }
                 else {
                     System.out.println("책이 이미 대출 중 입니다.");
