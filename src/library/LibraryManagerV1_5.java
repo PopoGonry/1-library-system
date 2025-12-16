@@ -5,9 +5,9 @@ import java.util.*;
 
 public class LibraryManagerV1_5 extends LibraryManager {
 
-    private static final String FILE_NAME = "library.json";
+    private static final String FILE_NAME = "library.csv";
 
-    private HashMap<Long, Book> bookHashMap = new HashMap<>();
+    private final HashMap<Long, Book> bookHashMap = new HashMap<>();
 
     @Override
     public Long addBook(Book book) {
@@ -30,10 +30,12 @@ public class LibraryManagerV1_5 extends LibraryManager {
 
         book.setId(newId);
 
+        super.getBookList().add(book);
         bookHashMap.put(book.getId(), book);
 
         return book.getId();
     }
+
 
     public boolean saveDate() {
         // try-with-resources 구문 (파일을 열고 자동으로 닫아줌)
@@ -43,7 +45,7 @@ public class LibraryManagerV1_5 extends LibraryManager {
                 Long key = bookEntry.getKey();
                 Book book = bookEntry.getValue();
 
-                String line = key + "," + String.join(",", convertBookToList(book));
+                String line = String.join(",", convertBookToList(book));
 
                 bw.write(line);
                 bw.newLine();
@@ -58,8 +60,24 @@ public class LibraryManagerV1_5 extends LibraryManager {
     }
 
     public boolean loadData() {
-        try (BufferedReader br = new BufferedReader(new FileReader(FILE_NAME))) {
+        // 1. 파일 객체 생성
+        File file = new File(FILE_NAME);
+
+        // 2. 파일이 존재하는지 확인하고 없으면 생성
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+                System.out.println("데이터 파일이 없어 새로 생성했습니다: " + FILE_NAME);
+                return true; // 빈 파일이므로 읽을 것이 없어 바로 종료 (성공 처리)
+            } catch (IOException e) {
+                System.out.println("파일 생성 중 오류 발생");
+                throw new RuntimeException(e);
+            }
+        }
+
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
+            bookHashMap.clear();
             while ((line = br.readLine()) != null) {
 
                 // 콤마(,)를 기준으로 문자열 자르기
@@ -71,6 +89,7 @@ public class LibraryManagerV1_5 extends LibraryManager {
                 Book book = convertListToBook(list);
 
                 bookHashMap.put(book.getId(), book);
+                super.getBookList().add(book);
             }
             System.out.println("파일 로드 완료!");
 
@@ -83,14 +102,14 @@ public class LibraryManagerV1_5 extends LibraryManager {
 
     List<String> convertBookToList(Book book) {
         List<String> listBook =  new ArrayList<>();
-        listBook.set(0, String.valueOf(book.getId()));
-        listBook.set(1, book.getIsbn());
-        listBook.set(2, book.getTitle());
-        listBook.set(3, book.getAuthor());
-        listBook.set(4, book.getPublisher());
-        listBook.set(5, String.valueOf(book.getPublicationYear()));
-        listBook.set(6, book.getClassificationCode());
-        listBook.set(7, String.valueOf(book.isLoaned()));
+        listBook.add(String.valueOf(book.getId()));
+        listBook.add(book.getIsbn());
+        listBook.add(book.getTitle());
+        listBook.add(book.getAuthor());
+        listBook.add(book.getPublisher());
+        listBook.add(String.valueOf(book.getPublicationYear()));
+        listBook.add(book.getClassificationCode());
+        listBook.add(String.valueOf(book.isLoaned()));
         return listBook;
     }
 
@@ -99,7 +118,8 @@ public class LibraryManagerV1_5 extends LibraryManager {
             throw new IllegalArgumentException();
         }
 
-        return new Book(Long.parseLong(list.get(0)),
+        return new Book(
+                list.get(0).equals("null") ? null : Long.parseLong(list.get(0)),
                 list.get(1),
                 list.get(2),
                 list.get(3),
