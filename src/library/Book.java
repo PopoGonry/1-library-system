@@ -1,5 +1,7 @@
 package library;
 
+import java.util.Objects;
+
 public class Book {
     private Long id; // 개별 재고 항목 ID
     private String isbn;
@@ -88,5 +90,17 @@ public class Book {
                 ", classificationCode='" + classificationCode + '\'' +
                 ", isLoaned=" + isLoaned +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return publicationYear == book.publicationYear && isLoaned == book.isLoaned && Objects.equals(id, book.id) && Objects.equals(isbn, book.isbn) && Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(publisher, book.publisher) && Objects.equals(classificationCode, book.classificationCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, isbn, title, author, publisher, publicationYear, classificationCode, isLoaned);
     }
 }

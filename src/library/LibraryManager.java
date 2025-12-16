@@ -4,15 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LibraryManager {
-    private final List<Book> bookList;
-
-    public LibraryManager() {
-        this.bookList = new ArrayList<>();
-    }
+    private final List<Book> bookList = new  ArrayList<>();
 
     public Long addBook(Book book) {
         long newId;
-
 
         if (bookList.isEmpty()) {
             newId = 1L;
