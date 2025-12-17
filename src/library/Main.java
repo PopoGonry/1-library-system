@@ -36,7 +36,7 @@ public class Main {
 
                 Book book = libraryManager.getBookById(libraryManager.addBook(new Book(isbn, title, author, publisher, publicationYear, classificationCode)));
 
-                System.out.println(book);
+                System.out.println(book.toStringWithFormat());
                 System.out.println("\n책 등록이 정상적으로 처리되었습니다.");
 
                 libraryManager.saveDate();
@@ -78,7 +78,7 @@ public class Main {
                         break;
                 }
                 for (Book searchBook : result) {
-                    System.out.println(searchBook);
+                    System.out.println(searchBook.toStringWithFormat());
                 }
                 System.out.println("책 검색이 정상적으로 처리되었습니다.");
                 break;
@@ -88,7 +88,7 @@ public class Main {
                 int bookId = sc.nextInt();
                 boolean isSuccessLoan = libraryManager.loanBook((long) bookId);
 
-                System.out.println(libraryManager.getBookById(bookId));
+                System.out.println(libraryManager.getBookById(bookId).toStringWithFormat());
 
                 System.out.println();
 
@@ -104,7 +104,7 @@ public class Main {
             case 4:
                 List<Book> bookList = libraryManager.getBookList();
                 for (Book resultBook : bookList) {
-                    System.out.println(resultBook);
+                    System.out.println(resultBook.toStringWithFormat());
                 }
                 break;
         }
