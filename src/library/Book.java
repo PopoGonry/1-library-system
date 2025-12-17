@@ -92,6 +92,18 @@ public class Book {
                 '}';
     }
 
+    public String toStringWithFormat() {
+        return "[ " + title + " ]" +
+                "\nisbn: " + isbn +
+                "\n저자: " + author +
+                "\n출판사: " + publisher +
+                "\n출판연도: " + publicationYear +
+                "\n분류코드: " + classificationCode +
+                "\n대출가능여부: " + (isLoaned ? "불가능" : "가능")
+                ;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
